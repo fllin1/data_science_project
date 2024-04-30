@@ -10,10 +10,7 @@ Dans ce fichier, vous pourrez indiquerer vos clés d'authentifications SSPCloud 
 
 Le fichier aura le format suivant :
 
-AWS_ACCESS_KEY_ID : "Votre AWS_ACCESS_KEY_ID"
-
-AWS_SECRET_ACCESS_KEY : "Votre AWS_SECRET_ACCESS_KEY"
-
-AWS_SESSION_TOKEN : "Votre AWS_SESSION_TOKEN"
-
-AWS_DEFAULT_REGION : "Votre AWS_DEFAULT_REGION"
+- AWS_ACCESS_KEY_ID : "Votre AWS_ACCESS_KEY_ID"
+- AWS_SECRET_ACCESS_KEY : "Votre AWS_SECRET_ACCESS_KEY"
+- AWS_SESSION_TOKEN : "Votre AWS_SESSION_TOKEN"
+- AWS_DEFAULT_REGION : "Votre AWS_DEFAULT_REGION"
