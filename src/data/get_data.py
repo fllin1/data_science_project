@@ -26,7 +26,7 @@ def import_yaml_config(config_path: str) -> dict:
     """
     configuration = {}
     if os.path.exists(config_path):
-        with open(config_path, mode='r', ) as file:
+        with open(config_path, mode='r', encoding='utf-8') as file:
             configuration = yaml.safe_load(file)
     else:
         raise FileNotFoundError("Attention: Le chemin vers le fichier config.yaml n'est pas \
@@ -112,3 +112,20 @@ def get_processed_test_data():
     with fs.open('flin/diffusion/test_processed.csv', mode="rb") as file_in:
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
+
+
+def get_processed_val_data():
+    """
+    Charge les données de test traitées à partir d'un fichier CSV stocké sur un système de fichiers
+    distant.
+
+    Utilise l'interface de fichiers fournie par la variable `fs` pour ouvrir et lire le fichier
+    'flin/processed/test.csv' en mode binaire. Ces données sont présumées être déjà traitées.
+
+    Returns:
+        pandas.DataFrame: Un DataFrame contenant les données de test traitées chargées du fichier
+        CSV.
+    """
+    with fs.open('flin/diffusion/val_processed.csv', mode="rb") as file_in:
+        val_data = pd.read_csv(file_in, sep=",")
+    return val_data
