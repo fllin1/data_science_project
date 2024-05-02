@@ -113,6 +113,7 @@ def get_processed_test_data():
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
 
+
 def get_processed_val_data():
     """
     Charge les données de test traitées à partir d'un fichier CSV stocké sur un système de fichiers

@@ -21,6 +21,8 @@ def house_price(dataset):
     """
     plt.figure(figsize=(9, 8))
     sns.histplot(dataset['SalePrice'], color='g', bins=100, kde=True, alpha=0.4)
+    fig = plt.gcf()
+    return fig
 
 
 def evaluate_model(logs):
@@ -32,10 +34,12 @@ def evaluate_model(logs):
 
     La fonction utilise la fonction plot de matplotlib.pyplot pour tracer la performance du modèle.
     """
-    plt.plot([log.num_trees for log in logs], [log.evaluation.rmse for log in logs])
-    plt.xlabel("Number of trees")
-    plt.ylabel("RMSE (out-of-bag)")
-    plt.show()
+    fig, ax = plt.subplots()
+    ax.plot([log.num_trees for log in logs], [log.evaluation.rmse for log in logs])
+    ax.set_xlabel("Nombre d'arbres")
+    ax.set_ylabel("RMSE (hors échantillon)")
+    ax.set_title("Performance du modèle en fonction du nombre d'arbres")
+    return fig
 
 
 def variable_weight(inspector):
@@ -55,7 +59,6 @@ def variable_weight(inspector):
     variable_importances = inspector.variable_importances()[variable_importance_metric]
 
     # Extract the feature name and importance values.
-    #
     # `variable_importances` is a list of <feature, importance> tuples.
     feature_names = [vi[0].name for vi in variable_importances]
     feature_importances = [vi[1] for vi in variable_importances]
@@ -73,4 +76,5 @@ def variable_weight(inspector):
     plt.xlabel(variable_importance_metric)
     plt.title("NUM AS ROOT of the class 1 vs the others")
     plt.tight_layout()
-    plt.show()
+    fig = plt.gcf() 
+    return fig
