@@ -82,9 +82,9 @@ def save_data(train_data, test_data, val_data, output_filepath):
         None: Les fichiers sont écrits à l'emplacement spécifié.
     """
     # Example of saving processed data to CSV files
-    train_data.to_csv(os.path.join(output_filepath, 'train_df.csv'), index=False)
-    test_data.to_csv(os.path.join(output_filepath, 'test_df.csv'), index=False)
-    val_data.to_csv(os.path.join(output_filepath, 'val_df.csv'), index=False)
+    train_data.to_csv(os.path.join(output_filepath, 'train_processed.csv'), index=False)
+    test_data.to_csv(os.path.join(output_filepath, 'test_processed.csv'), index=False)
+    val_data.to_csv(os.path.join(output_filepath, 'val_processed.csv'), index=False)
 
 
 @click.command()

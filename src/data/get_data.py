@@ -60,7 +60,7 @@ def get_train_data():
     Returns:
         pandas.DataFrame: Un DataFrame contenant les données d'entraînement chargées du fichier CSV.
     """
-    with fs.open("flin/raw/train.csv", mode="rb") as file_in:
+    with fs.open("flin/diffusion/train.csv", mode="rb") as file_in:
         dataset_df = pd.read_csv(file_in, sep=",")
     return dataset_df
 
@@ -75,7 +75,7 @@ def get_test_data():
     Returns:
         pandas.DataFrame: Un DataFrame contenant les données de test chargées du fichier CSV.
     """
-    with fs.open('flin/raw/test.csv', mode="rb") as file_in:
+    with fs.open('flin/diffusion/test.csv', mode="rb") as file_in:
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
 
@@ -92,7 +92,7 @@ def get_processed_train_data():
         pandas.DataFrame: Un DataFrame contenant les données d'entraînement traitées chargées du
         fichier CSV.
     """
-    with fs.open('flin/processed/train.csv', mode="rb") as file_in:
+    with fs.open('flin/diffusion/train_processed.csv', mode="rb") as file_in:
         train_data = pd.read_csv(file_in, sep=",")
     return train_data
 
@@ -109,6 +109,22 @@ def get_processed_test_data():
         pandas.DataFrame: Un DataFrame contenant les données de test traitées chargées du fichier
         CSV.
     """
-    with fs.open('flin/processed/test.csv', mode="rb") as file_in:
+    with fs.open('flin/diffusion/test_processed.csv', mode="rb") as file_in:
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
+
+def get_processed_val_data():
+    """
+    Charge les données de test traitées à partir d'un fichier CSV stocké sur un système de fichiers
+    distant.
+
+    Utilise l'interface de fichiers fournie par la variable `fs` pour ouvrir et lire le fichier
+    'flin/processed/test.csv' en mode binaire. Ces données sont présumées être déjà traitées.
+
+    Returns:
+        pandas.DataFrame: Un DataFrame contenant les données de test traitées chargées du fichier
+        CSV.
+    """
+    with fs.open('flin/diffusion/val_processed.csv', mode="rb") as file_in:
+        val_data = pd.read_csv(file_in, sep=",")
+    return val_data
