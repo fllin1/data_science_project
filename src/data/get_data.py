@@ -48,3 +48,8 @@ def get_test_data():
     with fs.open('flin/diffusion/test.csv', mode="rb") as file_in:
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
+
+def get_processed_train_data():
+    ...
+def get_processed_test_data():
+    ...
