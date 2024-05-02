@@ -20,10 +20,11 @@ def import_yaml_config(config_path: str) -> dict:
         with open(config_path, 'r') as file:
             config = yaml.safe_load(file)
     else:
-        raise Exception(f"Attention: Le chemin vers le fichier n'est pas le bon.")
+        raise Exception(f"Attention: Le chemin vers le fichier config.yaml n'est pas le bon.")
     return config
 
-config = import_yaml_config("../config/config.yaml")
+config = import_yaml_config("/home/onyxia/work/data_science_project/config/config.yaml")
+# config = import_yaml_config("../config/config.yaml") # This might not work
 
 os.environ["AWS_ACCESS_KEY_ID"] = config.get("AWS_ACCESS_KEY_ID")
 os.environ["AWS_SECRET_ACCESS_KEY"] = config.get("AWS_SECRET_ACCESS_KEY")

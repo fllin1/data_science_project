@@ -1,4 +1,8 @@
 from setuptools import find_packages, setup
+import sys
+if sys.version_info[0:2] != (3, 11):
+    raise Exception('Requires python 3.11')
+
 
 setup(
     name='src',
