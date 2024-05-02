@@ -3,7 +3,12 @@ import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
+import get_data as gd
+import numpy as np
 
+def split_dataset(dataset, test_ratio=0.30):
+    test_indices = np.random.rand(len(dataset)) < test_ratio
+    return dataset[~test_indices], dataset[test_indices]
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
@@ -14,6 +19,7 @@ def main(input_filepath, output_filepath):
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
+
 
 
 if __name__ == '__main__':
@@ -28,3 +34,4 @@ if __name__ == '__main__':
     load_dotenv(find_dotenv())
 
     main()
+    

@@ -20,12 +20,10 @@ def import_yaml_config(config_path: str) -> dict:
         with open(config_path, 'r') as file:
             config = yaml.safe_load(file)
     else:
-        print(f"Attention: Le fichier {config_path} n'existe pas.")
+        raise Exception(f"Attention: Le chemin vers le fichier n'est pas le bon.")
     return config
 
-
-CONFIG_PATH = 'config.yaml'
-config = import_yaml_config(CONFIG_PATH)
+config = import_yaml_config("../config/config.yaml")
 
 os.environ["AWS_ACCESS_KEY_ID"] = config.get("AWS_ACCESS_KEY_ID")
 os.environ["AWS_SECRET_ACCESS_KEY"] = config.get("AWS_SECRET_ACCESS_KEY")
@@ -49,14 +47,3 @@ def get_test_data():
     with fs.open('flin/diffusion/test.csv', mode="rb") as file_in:
         test_data = pd.read_csv(file_in, sep=",")
     return test_data
-
-
-def get_submission_data():
-    with fs.open('flin/diffusion/sample_submission.csv', mode="rb") as file_in:
-        sample_submission_df = pd.read_csv(file_in, sep=",")
-    return sample_submission_df
-
-
-def split_dataset(dataset, test_ratio=0.30):
-    test_indices = np.random.rand(len(dataset)) < test_ratio
-    return dataset[~test_indices], dataset[test_indices]
