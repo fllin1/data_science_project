@@ -4,7 +4,7 @@ https://www.kaggle.com/code/gusthema/house-prices-prediction-using-tfdf/comments
 
 ## Fichier config.yaml
 
-Il faudra modifier le fichier `config.yaml` avec vos clés permettant d'accéder au stockage MinIO.
+Il faudra modifier le fichier `config.yaml` avec vos clés permettant d'accéder au stockage MinIO. Assurez vous que le chemin vers votre fichier `config.yaml` dans le fichier `src/data/get_data.py` est le bon.
 
 Dans ce fichier, vous pourrez indiquerer vos clés d'authentifications SSPCloud : https://datalab.sspcloud.fr/account/storage
 
