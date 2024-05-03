@@ -3,6 +3,16 @@
 Nous avons choisi le sujet application interactive.
 Ce projet s'appuie le notebook type contest kaggle (https://www.kaggle.com/code/gusthema/house-prices-prediction-using-tfdf/comments).
 
+# Attention : veuillez utiliser Python 3.11 afin de bien installer tous les packages dans le fichier requirements.txt
+
+## Installation des librairies
+
+N'oubliez pas d'installer l'ensemble des librairies à l'aide de pip :
+
+```bash
+pip install -r path/to/requirements.txt
+```
+
 ## Fichier config.yaml
 
 Il faudra modifier le fichier `config/config.yaml` avec vos clés permettant d'accéder au stockage MinIO. Assurez vous que le chemin vers votre fichier `config/config.yaml` dans le fichier `src/data/get_data.py` est le bon.
