@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import tensorflow_decision_forests as tfdf
 
 import sys
 sys.path.append('src/data')
@@ -52,8 +53,12 @@ acronymes = {
 # Sidebar for death data
 st.sidebar.header("Random Forest Info")
 select_model = st.sidebar.selectbox('Sélectionnez le modèle',
-                                    ['RandomForestModel', 'GradientBoostedTreesModel',
-                                     'CartModel', 'DistributedGradientBoostedTreesModel'])
+                                    ['RandomForestModel', 'GradientBoostedTreesModel'])
+
+models_dict = {
+    'RandomForestModel' : tfdf.keras.RandomForestModel,
+    'GradientBoostedTreesModel' : tfdf.keras.GradientBoostedTreesModel
+}
 
 # Sidebar for Twitter data
 st.sidebar.header("Évaluation du modèle")
@@ -104,34 +109,33 @@ def data_visualization_page():
 - Il a tendance à être plus précis que les forêts aléatoires mais peut être plus sensible \
     au surajustement.
 """)
-        elif select_model == 'CartModel':
-            st.markdown("""
-- C'est un modèle d'arbre de décision simple basé sur l'algorithme CART (Classification and \
-    Regression Trees).
-- Il divise récursivement les données en fonction des caractéristiques pour minimiser la \
-    variance des nœuds.
-- Il est souvent utilisé pour la classification et la régression sur des ensembles de données \
-    de petite à moyenne taille.
-""")
-        elif select_model == 'DistributedGradientBoostedTreesModel':
-            st.markdown("""
-- C'est une version distribuée du modèle de gradient boosting, conçue pour fonctionner sur de \
-    grands ensembles de données.
-- Il utilise le parallélisme pour accélérer l'apprentissage et est capable de gérer des \
-    ensembles de données massifs.
-- Il est souvent utilisé dans des scénarios où les données sont trop grandes pour tenir en \
-    mémoire sur une seule machine.
-""")
+#         elif select_model == 'CartModel':
+#             st.markdown("""
+# - C'est un modèle d'arbre de décision simple basé sur l'algorithme CART (Classification and \
+#     Regression Trees).
+# - Il divise récursivement les données en fonction des caractéristiques pour minimiser la \
+#     variance des nœuds.
+# - Il est souvent utilisé pour la classification et la régression sur des ensembles de données \
+#     de petite à moyenne taille.
+# """)
+#         elif select_model == 'DistributedGradientBoostedTreesModel':
+#             st.markdown("""
+# - C'est une version distribuée du modèle de gradient boosting, conçue pour fonctionner sur de \
+#     grands ensembles de données.
+# - Il utilise le parallélisme pour accélérer l'apprentissage et est capable de gérer des \
+#     ensembles de données massifs.
+# - Il est souvent utilisé dans des scénarios où les données sont trop grandes pour tenir en \
+#     mémoire sur une seule machine.
+# """)
 
     # Plot results
     if select_info is not None:
         st.subheader("Résultats")
-        st.write("Le modèle sur lequel nous avons travaillé est le RandomForestModel")
         st.write(select_info)
         if select_info == 'RMSE / Nombre d\'arbres':
-            st.pyplot(vz.evaluate_logs(dataset_df))
+            st.pyplot(vz.evaluate_logs(dataset_df, models_dict[select_model]))
         elif select_info == 'Poids des variables':
-            st.pyplot(vz.plot_inspector(dataset_df))
+            st.pyplot(vz.plot_inspector(dataset_df, models_dict[select_model]))
 
 
 def main():
