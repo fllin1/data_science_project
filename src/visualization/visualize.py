@@ -10,7 +10,7 @@ sys.path.append('../src/visualization')
 import plot as pl
 
 
-def get_model(dataset_df):
+def get_model(dataset_df, model):
     """
     Crée et entraîne un modèle de forêt aléatoire TensorFlow Decision Forests à partir du dataset 
     fourni.
@@ -26,12 +26,12 @@ def get_model(dataset_df):
     train_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_ds_pd,
                                                      label=label,
                                                      task=tfdf.keras.Task.REGRESSION)
-    rf = tfdf.keras.RandomForestModel(task=tfdf.keras.Task.REGRESSION)
+    rf = model(task=tfdf.keras.Task.REGRESSION)
     rf.fit(x=train_ds)
     return rf
 
 
-def evaluate_logs(dataset_df):
+def evaluate_logs(dataset_df, model):
     """
     Évalue les journaux d'entraînement du modèle de forêt aléatoire TensorFlow Decision Forests
     et génère des visualisations pour évaluer la performance du modèle.
@@ -39,12 +39,12 @@ def evaluate_logs(dataset_df):
     Args:
         dataset_df (pandas.DataFrame): Le DataFrame contenant le dataset.
     """
-    rf = get_model(dataset_df)
+    rf = get_model(dataset_df, model)
     logs = rf.make_inspector().training_logs()
     return pl.evaluate_model(logs)
 
 
-def plot_inspector(dataset_df):
+def plot_inspector(dataset_df, model):
     """
     Génère des visualisations basées sur l'inspecteur du modèle de forêt aléatoire TensorFlow 
     Decision Forests.
@@ -52,6 +52,6 @@ def plot_inspector(dataset_df):
     Args:
         dataset_df (pandas.DataFrame): Le DataFrame contenant le dataset.
     """
-    rf = get_model(dataset_df)
+    rf = get_model(dataset_df, model)
     inspector = rf.make_inspector()
     return pl.variable_weight(inspector)
