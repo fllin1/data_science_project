@@ -5,6 +5,8 @@ Ce projet s'appuie le notebook type contest kaggle (https://www.kaggle.com/code/
 
 # Attention : veuillez utiliser Python 3.11 afin de bien installer tous les packages dans le fichier requirements.txt
 
+Lorsque vous ouvrez un nouveau service sur le SSP-Cloud, déroulez la fenêtre dépliante "Configuration", défilez à droite jusqu'à "Service" et sélectionnez "Version:3.11.8".
+
 ## Installation des librairies
 
 N'oubliez pas d'installer l'ensemble des librairies à l'aide de pip :
